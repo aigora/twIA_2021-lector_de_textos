@@ -4,9 +4,9 @@ Una vez almacenados, cuando queramos reproducir cierto sonido, lo único que ten
 
 ## INTEGRANTES DEL EQUIPO 
 
-Cristina Navarro Bados
+Cristina Navarro Bados (Cnbados5580)
 Almudena Murillo Martin-Asin
-Alejandro Palomo de la Peña (alejandro55393)
+Alejandro Palomo de la Peña
 Monica Sacristán Sanchez
 Dani Sato Leandro
 Pablo Rosario Rúas
