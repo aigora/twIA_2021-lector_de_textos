@@ -6,7 +6,7 @@ Una vez almacenados, cuando queramos reproducir cierto sonido, lo único que ten
 
 Cristina Navarro Bados (Cnbados5580)
 Almudena Murillo Martin-Asin
-Alejandro Palomo de la Peña
+Alejandro Palomo de la Peña (alejandro55393)
 Monica Sacristán Sanchez
 Dani Sato Leandro
 Pablo Rosario Rúas
