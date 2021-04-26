@@ -1,11 +1,17 @@
-# [Título del trabajo]
+## LECTOR DE TEXTOS UNA VEZ GUARDADOS
+Este proyecto trata sobre la grabación de ciertos sonidos por medio de una grabadora y que estos sean reproducidos por medio de un programa que los almacene. 
+Una vez almacenados, cuando queramos reproducir cierto sonido, lo único que tenemos que hacer es clickar en el pulsador y que este accione el programa reproduciendo dicho sonido.
 
-[Descripción breve del proyecto a realizar (2-3 frases).]
+## INTEGRANTES DEL EQUIPO 
 
-## Integrantes del equipo
-
-[Nombres, apellidos, y usuario GitHub de los integrantes del equipo.]
+Cristina Navarro Bados
+Almudena Murillo Martin-Asin
+Alejandro Palomo de la Peña
+Monica Sacristán Sanchez
+Dani Sato Leandro
+Pablo Rosario Rúas
 
 ## Objetivos del trabajo
 
-[Lista de los objetivos que se persiguen con el trabajo propuesto.]
+Nuestro principal objetivo es aprender a programar desde cero. 
+Para ello aprenderemos a utilizar sensores y actuadores que nos harán más facil la realización de la parte física del programa.
