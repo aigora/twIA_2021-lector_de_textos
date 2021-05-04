@@ -1,0 +1,190 @@
+namespace WindowsFormsApp1
+{
+    partial class Form1
+    {
+        /// <summary>
+        /// Variable del diseñador necesaria.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Limpiar los recursos que se estén usando.
+        /// </summary>
+        /// <param name="disposing">true si los recursos administrados se deben desechar; false en caso contrario.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Código generado por el Diseñador de Windows Forms
+
+        /// <summary>
+        /// Método necesario para admitir el Diseñador. No se puede modificar
+        /// el contenido de este método con el editor de código.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.trackrate = new System.Windows.Forms.TrackBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.combobox = new System.Windows.Forms.ComboBox();
+            this.btnpausar = new System.Windows.Forms.Button();
+            this.btndetener = new System.Windows.Forms.Button();
+            this.btnsalir = new System.Windows.Forms.Button();
+            this.trackvolumen = new System.Windows.Forms.TrackBar();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.trackrate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackvolumen)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(42, 49);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(731, 132);
+            this.textBox1.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(30, 346);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(176, 70);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Leer";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // trackrate
+            // 
+            this.trackrate.Location = new System.Drawing.Point(520, 255);
+            this.trackrate.Minimum = -10;
+            this.trackrate.Name = "trackrate";
+            this.trackrate.Size = new System.Drawing.Size(253, 56);
+            this.trackrate.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(39, 199);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(36, 17);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Voz:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // combobox
+            // 
+            this.combobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.combobox.FormattingEnabled = true;
+            this.combobox.Location = new System.Drawing.Point(412, 199);
+            this.combobox.Name = "combobox";
+            this.combobox.Size = new System.Drawing.Size(361, 24);
+            this.combobox.TabIndex = 4;
+            // 
+            // btnpausar
+            // 
+            this.btnpausar.Location = new System.Drawing.Point(223, 346);
+            this.btnpausar.Name = "btnpausar";
+            this.btnpausar.Size = new System.Drawing.Size(169, 70);
+            this.btnpausar.TabIndex = 5;
+            this.btnpausar.Text = "Pausa";
+            this.btnpausar.UseVisualStyleBackColor = true;
+            this.btnpausar.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // btndetener
+            // 
+            this.btndetener.Location = new System.Drawing.Point(411, 346);
+            this.btndetener.Name = "btndetener";
+            this.btndetener.Size = new System.Drawing.Size(172, 70);
+            this.btndetener.TabIndex = 6;
+            this.btndetener.Text = "Detener";
+            this.btndetener.UseVisualStyleBackColor = true;
+            this.btndetener.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // btnsalir
+            // 
+            this.btnsalir.Location = new System.Drawing.Point(609, 346);
+            this.btnsalir.Name = "btnsalir";
+            this.btnsalir.Size = new System.Drawing.Size(189, 70);
+            this.btnsalir.TabIndex = 7;
+            this.btnsalir.Text = "Salir";
+            this.btnsalir.UseVisualStyleBackColor = true;
+            this.btnsalir.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // trackvolumen
+            // 
+            this.trackvolumen.Location = new System.Drawing.Point(139, 255);
+            this.trackvolumen.Maximum = 100;
+            this.trackvolumen.Name = "trackvolumen";
+            this.trackvolumen.Size = new System.Drawing.Size(253, 56);
+            this.trackvolumen.TabIndex = 8;
+            this.trackvolumen.Value = 50;
+            this.trackvolumen.Scroll += new System.EventHandler(this.trackvolumen_Scroll);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(39, 264);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(67, 17);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Volumen:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(409, 255);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(42, 17);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Rate:";
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(833, 428);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.trackvolumen);
+            this.Controls.Add(this.btnsalir);
+            this.Controls.Add(this.btndetener);
+            this.Controls.Add(this.btnpausar);
+            this.Controls.Add(this.combobox);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.trackrate);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox1);
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.trackrate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackvolumen)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TrackBar trackrate;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox combobox;
+        private System.Windows.Forms.Button btnpausar;
+        private System.Windows.Forms.Button btndetener;
+        private System.Windows.Forms.Button btnsalir;
+        private System.Windows.Forms.TrackBar trackvolumen;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+    }
+}
