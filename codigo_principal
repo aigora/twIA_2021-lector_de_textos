@@ -1,0 +1,124 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Speech.Synthesis;
+using System.IO;
+
+namespace WindowsFormsApp1
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        SpeechSynthesizer dictador;
+        List<VoiceInfo> listarvoces = new List<VoiceInfo>();
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dictador = new SpeechSynthesizer();
+
+            int ind;
+            double volumen = trackvolumen.Value;
+            double velocidad = trackrate.Value;
+
+            ind = combobox.SelectedIndex;
+            String nombrevoces = listarvoces.ElementAt(ind).Name;
+            dictador.SelectVoice(nombrevoces);
+
+            dictador.Volume = (int)volumen;
+            dictador.Rate = (int)velocidad;
+            dictador.SpeakAsync(textBox1.Text);
+
+            btnpausar.Text = "Pausar";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dictador != null)
+            {
+
+                if (dictador.State == SynthesizerState.Speaking)
+                {
+                    dictador.Pause(); btnpausar.Text = "Continuar";
+                }
+                else if (dictador.State == SynthesizerState.Paused)
+                {
+                    dictador.Resume(); btnpausar.Text = "Pausar";
+                }
+
+            }
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (dictador != null)
+            {
+                dictador.Dispose();
+            }
+        }
+        private void button4_Click(object sender, EventArgs e)
+        { this.Close(); }
+
+
+        private void btndetener_Click(object sender, EventArgs e)
+        {
+            if (dictador != null)
+            {
+                dictador.Dispose();
+            }
+        }
+        private void btnsalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trackvolumen_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            dictador = new SpeechSynthesizer();
+
+            foreach (InstalledVoice x in dictador.GetInstalledVoices())
+            {
+                listarvoces.Add(x.VoiceInfo);
+                combobox.Items.Add(x.VoiceInfo.Name);
+            }
+
+            combobox.SelectedIndex = 0;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            dictador = new SpeechSynthesizer();
+
+            int ind;
+            double volumen = trackvolumen.Value;
+            double velocidad = trackrate.Value;
+
+            ind = combobox.SelectedIndex;
+            String nombrevoces = listarvoces.ElementAt(ind).Name;
+            dictador.SelectVoice(nombrevoces);
+
+            dictador.Volume = (int)volumen;
+            dictador.Rate = (int)velocidad;
+            dictador.SpeakAsync(textBox1.Text);
+
+            btnpausar.Text = "Pausar";
+        }
+    }
+}
