@@ -118,7 +118,7 @@ namespace WindowsFormsApp1
             dictador.Rate = (int)velocidad;
             dictador.SpeakAsync(textBox1.Text);
 
-            btnpausar.Text = "Pausar";
+            btnpausar.Text  = "Pausar";
         }
     }
 }
