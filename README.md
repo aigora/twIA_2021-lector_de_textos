@@ -9,7 +9,7 @@ Almudena Murillo Martin-Asin (almumurillo)
 Alejandro Palomo de la Peña (alejandro55393)
 Monica Sacristán Sanchez(monicasacristans)
 Dani Sato Leandro 
-Pablo Rosario Rúas 
+Pablo Rosario Rúas (Pabloroosario)
 
 ## Objetivos del trabajo
 
