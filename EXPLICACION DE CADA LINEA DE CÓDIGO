@@ -1,0 +1,132 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Speech.Synthesis;
+using System.IO;
+// ESTOS ESTÁN EXPLICADOS EN EL INDICE
+namespace WindowsFormsApp1 // nombre que le hemos dado
+{
+    public partial class Form1 : Form //(public): es un modificador de acceso para tipos. No hay ninguna restriccion para el acceso a miembros públicos.
+    //(partial): permite dividir la definicion de una clase en varios archivos
+    //(class): esto significa que es una clase
+    {
+        public Form1() //(public): es un modificador de acceso para tipos.
+    //No hay ninguna restriccion para el acceso a miembros públicos.
+        {
+            InitializeComponent(); // antes de examinar las clases generadas implementamos esta estructura
+        }
+
+        SpeechSynthesizer dictador; // Proporciona acceso a la funcionalidad de un motor de síntesis de voz instalada
+        List<VoiceInfo> listarvoces = new List<VoiceInfo>(); //List<>: Proporciona metodos para buscar y ordenar listas(en este caso las voces)
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dictador = new SpeechSynthesizer(); // Proporciona acceso a la funcionalidad de un motor de síntesis de voz instalado
+            int ind;
+            double volumen = trackvolumen.Value;  //Almacena el volumen del programa
+            double velocidad = trackrate.Value;//Almacena la velocidad de habla del programa
+
+            ind = combobox.SelectedIndex; // (combobox) permite representar un control de cuadro
+            //combinado de Windows. (SelectedIndex) establece el elemento seleccionado actualmente en el elemento Combobox
+            String nombrevoces = listarvoces.ElementAt(ind).Name; 
+            dictador.SelectVoice(nombrevoces); // Método de SpeechSynthesizer:
+            // .SelectVoice(nombre de la voz que se va a seleccionar): Selecciona una voz concreta por nombre
+
+            dictador.Volume = (int)volumen; //Propiedad de SpeechSynthesizer: .Volume: Obtiene o establece el volumen de salidad del objeto SpeechSynthesizer
+            dictador.Rate = (int)velocidad;//Propiedad de SpeechSynthesizer: .Rate: Obtiene o establece la velocidad de habla del objeto SpeechSynthesizer
+            dictador.SpeakAsync(textBox1.Text);//Método de SpeechSynthesizer: .SpeakAsync(texto o archivo de audio): De forma asincrónica habla el contenido
+            //de un objeto (en este caso de textBox1.Text)
+
+            btnpausar.Text = "Pausar"; 
+        }
+
+        private void button2_Click(object sender, EventArgs e) //El acceso (private) es el nivel de acceso menos permisivo. Solo son accesibles dentro del cuerpo de la clase que se declaran
+        {
+            if (dictador != null)
+            {
+
+                if (dictador.State == SynthesizerState.Speaking) //SynthesizerState enumera los niveles de énfasis de sintetizador. Sus campos pueden ser Paused( indica que 
+            // SpeechSynthesizer está en pausa); Ready( Indica que está listo para generar voz de una solicitud; Speaking( Indica que está hablando)
+                {
+                    dictador.Pause(); btnpausar.Text = "Continuar"; //Indica que está hablando
+                }
+                else if (dictador.State == SynthesizerState.Paused)//SynthesizerState enumera los niveles de énfasis de sintetizador. Sus campos pueden ser Paused( indica que 
+            // SpeechSynthesizer está en pausa); Ready( Indica que está listo para generar voz de una solicitud; Speaking( Indica que está hablando)
+                {
+                    dictador.Resume(); btnpausar.Text = "Pausar"; //indica que SpeechSynthesizer está en pausa
+                }
+
+            }
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (dictador != null)
+            {
+                dictador.Dispose(); 
+            }
+        }
+        private void button4_Click(object sender, EventArgs e)
+        { this.Close(); }
+
+
+        private void btndetener_Click(object sender, EventArgs e)
+        {
+            if (dictador != null)
+            {
+                dictador.Dispose();
+            }
+        }
+        private void btnsalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+       /* private void trackvolumen_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            dictador = new SpeechSynthesizer();
+
+            foreach (InstalledVoice x in dictador.GetInstalledVoices())
+            {
+                listarvoces.Add(x.VoiceInfo);
+                combobox.Items.Add(x.VoiceInfo.Name);
+            }
+
+            combobox.SelectedIndex = 0;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            dictador = new SpeechSynthesizer();
+
+            int ind;
+            double volumen = trackvolumen.Value;
+            double velocidad = trackrate.Value;
+
+            ind = combobox.SelectedIndex;
+            String nombrevoces = listarvoces.ElementAt(ind).Name;
+            dictador.SelectVoice(nombrevoces);
+
+            dictador.Volume = (int)volumen;
+            dictador.Rate = (int)velocidad;
+            dictador.SpeakAsync(textBox1.Text); 
+
+            btnpausar.Text  = "Pausar"; // de la biblioteca de System.Text
+        }
+    }
+}*/
