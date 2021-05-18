@@ -68,26 +68,26 @@ namespace WindowsFormsApp1 // nombre que le hemos dado
         {
             if (dictador != null)
             {
-                dictador.Dispose(); 
+                dictador.Dispose(); //Se utiliza para reiniciar el programa
             }
         }
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e) //Sirve para salir y cerrar la ventana
         { this.Close(); }
 
 
-        private void btndetener_Click(object sender, EventArgs e)
+        private void btndetener_Click(object sender, EventArgs e) //Aquí detiene
         {
             if (dictador != null)
             {
-                dictador.Dispose();
+                dictador.Dispose(); ///Se utiliza para reiniciar el programa
             }
         }
-        private void btnsalir_Click(object sender, EventArgs e)
+        private void btnsalir_Click(object sender, EventArgs e) //Cierra la ventana
         {
             this.Close();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e) 
         {
 
         }
@@ -99,32 +99,32 @@ namespace WindowsFormsApp1 // nombre que le hemos dado
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            dictador = new SpeechSynthesizer();
+            dictador = new SpeechSynthesizer(); // Proporciona acceso a la funcionalidad de un motor de síntesis de voz instalado
 
             foreach (InstalledVoice x in dictador.GetInstalledVoices())
             {
                 listarvoces.Add(x.VoiceInfo);
-                combobox.Items.Add(x.VoiceInfo.Name);
+                combobox.Items.Add(x.VoiceInfo.Name);//Objeto que es el elemento seleccionado actualmente
             }
 
-            combobox.SelectedIndex = 0;
+            combobox.SelectedIndex = 0; //Inicializa una nueva instancia de la clase ComboBox. Establece el índice que especifica el elemento seleccionado actualmente. En este caso devolvería cero ya que no habría ningun elemento seleccionado
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            dictador = new SpeechSynthesizer();
+            dictador = new SpeechSynthesizer(); // Proporciona acceso a la funcionalidad de un motor de síntesis de voz instalado
 
-            int ind;
-            double volumen = trackvolumen.Value;
-            double velocidad = trackrate.Value;
+            int ind; //La variable ind coge que voz se ha seleccionado 
+            double volumen = trackvolumen.Value;//Establece el volumen de habla del objeto SpeechSynthesizer
+            double velocidad = trackrate.Value;// establece la velocidad de habla del objeto SpeechSynthesizer.
 
-            ind = combobox.SelectedIndex;
-            String nombrevoces = listarvoces.ElementAt(ind).Name;
-            dictador.SelectVoice(nombrevoces);
+            ind = combobox.SelectedIndex; // Se asigna el incide ind a una lista, en la que se encuentran las diferentes voces posibles a elegir
+            String nombrevoces = listarvoces.ElementAt(ind).Name; //Se asigna el nombre de cada lista
+            dictador.SelectVoice(nombrevoces); //Obtiene el nombre de la voz.
 
-            dictador.Volume = (int)volumen;
-            dictador.Rate = (int)velocidad;
-            dictador.SpeakAsync(textBox1.Text); 
+            dictador.Volume = (int)volumen; //Selecciona el volumen elegido
+            dictador.Rate = (int)velocidad; //Selecciona la velocidad elegida
+            dictador.SpeakAsync(textBox1.Text);  //Esta funcion dicta la frase escrita
 
             btnpausar.Text  = "Pausar"; // de la biblioteca de System.Text
         }
