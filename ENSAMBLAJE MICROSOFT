@@ -1,0 +1,49 @@
+INDICE
+1.	Diseño
+2.	Motivación
+3.	Método de utilización
+4.	Ejemplos de utilización
+5.	Microsoft
+
+
+
+5. Microsoft
+Para empezar hemos utilizado estos recursos de microsoft que son ensambladores que proporcionan acceso a la funcionalidad de un programa.
+Provienen de la versión .NET Framework 4.8 que se pueden utilizar en Visual Studio 2012 o posteriores 
+mediante la instalación del paquete de desarrollador de .NET Framework 4.8.
+
+•	System.Collections.Generic (espacio de nombres) : Contiene interfaces y clases que definen colecciones genéricas, 
+lo que permite que los usuarios creen colecciones fuertemente tipadas para proporcionar una mayor seguridad de tipos y un 
+rendimiento mejor que los de las colecciones no genéricas fuertemente tipadas.
+
+•	System.ComponentModel (espacio de nombres): Proporciona clases que se usan para implementar el comportamiento de los 
+componentes y controles en tiempo de diseño y en tiempo de ejecución. Este espacio de nombres incluye las clases bases y las 
+interfaces para implementar atributos y convertidores de tipos, enlazarlos con orígenes de datos y generar licencias para los componentes.
+
+•	System.Data (espacio de nombres):  Ofrece acceso a clases que representan la arquitectura de ADO.NET. ADO.NET permite crear 
+componentes que administran datos de varios orígenes de datos con eficacia.
+
+•	System.Drawing (espacio de nombres): Proporciona acceso a la funcionalidad básica de gráficos de GDI+. 
+En los espacios de nombres System.Drawing.Drawing2D, System.Drawing.Imaging y System.Drawing.Text se proporciona funcionalidad más avanzada. 
+
+•	System.Linq (espacio de nombres): Proporciona clases e interfaces que admiten consultas que utilizan Language-Integrated Query (LINQ).
+
+•	System.Text (espacio de nombres): Contiene clases que representan codificaciones de caracteres ASCII y Unicode; 
+clases base abstractas para convertir bloques de caracteres a y desde bloques de bytes; y una clase auxiliar que 
+manipula y da formato a objetos String sin crear instancias intermedias de String.
+
+•	System.Threading.Tasks (espacio de nombres): Proporciona tipos que simplifican la escritura de código simultáneo y asincrónico. 
+Los tipos principales son Task, que representa una operación asincrónica que se puede esperar y cancelar, y Task<TResult>, 
+que es una tarea que puede devolver un valor. La clase TaskFactory proporciona métodos estáticos para crear e iniciar tareas, 
+y la clase TaskScheduler proporciona la infraestructura predeterminada de programación de subprocesos.
+
+•	System.Windows.Forms (espacio de nombres): Contiene clases para crear aplicaciones para Windows que aprovechan 
+todas las ventajas de las características de la interfaz de usuario enriquecida disponibles en el sistema operativo Microsoft Windows.
+
+•	System.Speech.Synthesis (espacio de nombres): Contiene clases para inicializar y configurar un motor de síntesis de voz, 
+crear mensajes, generar voz, responder a eventos y modificar características de voz.
+
+•	System.IO (espacio de nombres): Contiene tipos que permiten leer y escribir en los archivos y secuencias de datos, 
+así como tipos que proporcionan compatibilidad básica con los archivos y directorios.
+
+
