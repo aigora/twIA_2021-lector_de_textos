@@ -1,6 +1,6 @@
-## LECTOR DE TEXTOS UNA VEZ GUARDADOS
+## LECTOR DE TEXTOS 
 Este proyecto trata sobre la grabación de ciertos sonidos por medio de una grabadora y que estos sean reproducidos por medio de un programa que los almacene. 
-Una vez almacenados, cuando queramos reproducir cierto sonido, lo único que tenemos que hacer es clickar en el pulsador y que este accione el programa reproduciendo dicho sonido.
+Una vez almacenados, cuando queramos reproducir cierto sonido, lo único que tenemos que hacer es poner una frase y clickar en el pulsador y que este accione el programa reproduciendo dicho sonido.
 
 ## INTEGRANTES DEL EQUIPO 
 
