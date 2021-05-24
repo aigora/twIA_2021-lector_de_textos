@@ -5,14 +5,41 @@ INDICE
 4.	Ejemplos de utilización
 5.	Microsoft
 
+1.Diseño
+
+Nuestro proyecto está compuesto por un Arduino UNO, una placa de microcontrolador de código abierto, equipada con conjuntos de pines de entrada y salida tanto digitales 
+como analógicos que pueden ser conectados a varias placas de expansión y otros circuitos. Se conectará a través de cables como puente con una protoboard (también llamado
+placa de pruebas o placa de inserción), que posee unos orificios conectados eléctricamente entre sí siguiendo un patrón horizontal o vertical y que se empleará para realizar
+pruebas de circuitos electrónicos, insertando en ella componentes electrónicos y cables como puente. Está hecho de dos materiales, un aislante y un conductor que conecta los
+diversos orificios entre sí. Uno de sus usos principales es la creación y comprobación de prototipos de circuitos electrónicos antes de llegar a la impresión mecánica del 
+circuito en sistemas de producción comercial. Por último, cada luz LED tendrá una resistencia para evitar que se pueda dañar tanto el circuito como por la propia luz.
+
+
 2.Motivación
 
-Nuestra principal motivación a la hora de realizar este proyecto es intentar ayudar a las personas con problemas de visión o de habla. Ya que gracias a nuestra aplicación, serán capaces de escuchar o
-comunicarse con otras personas a través de cualquier dispositivo. Un ejemplo  de aplicación de nuestro proyecto,
-podría ser presentar este programa a la ONCE para que las personas con  problemas visuales y de comunciación pudiesen acceder de manera gratuita a esta
-aplicación de adaptación
+Nuestra principal motivación a la hora de realizar este proyecto es intentar completar un sistema que pueda utilizarse con fines decorativos. Los leds se encenderán y 
+apagarán desde el pin - al -. Entre led y led habrá un tiempo de encendido y apagado de – ms.  Más tarde, se realizará el proceso inverso y los LEDS se encenderán y 
+apagarán desde el pin - al -, con un tiempo de encendido y apagado de - ms. Esta secuencia se debe repetir de una manera indefinida.
 
-4. Ejemplos de utilización
+
+3 y 4. Método y ejemplos de utilización
+
+Gracias a la Ley de Ohm vamos a poder relacionar a través de una sencilla fórmula, voltaje, intensidad y resistencia. La Ley de Ohm establece que la intensidad de la
+corriente eléctrica que circula por un conductor eléctrico es directamente proporcional a la diferencia de potencial aplicada e inversamente proporcional a la resistencia 
+del mismo, o lo que es lo mismo:
+I = V / R
+·    Voltaje: también conocido como tensión, es la presión que una fuente eléctrica ejerce sobre las cargas eléctricas (electrones) eºn un circuito eléctrico. Se mide en 
+Voltios (V).
+·    Intensidad: cantidad de cargas eléctricas, que circulan por un conductor en un momento determinado. Se mide en Amperios (A).
+·    Resistencia: oposición que ejerce el cuerpo al paso de la corriente eléctrica. Se mide en Ohmios (Ω).
+ 
+Cuando conectamos un componente electrónico a una placa de Arduino, se ejerce sobre él una diferencia de potencial de -V en ambos extremos, es decir, estará recibiendo una 
+tensión de -V.
+Los Led que estamos utilizando para la práctica admiten una tensión máxima de - V y para evitar que se puedan dañar tendremos que colocarle una resistencia al circuito. Para 
+ello, vamos a calcular el valor de la resistencia siguiendo la Ley de Ohm, es decir, la tensión en el Led tiene que ser 2,1V. Si el pin de Arduino da 5V, el tensión que debe 
+circular por la resistencia es -V –V = -V. Por otro lado, la intensidad que circula por el Led es de -mA. Redondeamos el resultado obtenido a un valor de resistencia 
+(siempre por encima de su resistencia ideal), obteniendo una resistencia de -Ω, que mirando en la tabla de resistencias corresponde a la resistencia de color rojo-rojo-marrón.
+
 
 5. Microsoft
 Para empezar hemos utilizado estos recursos de microsoft que son ensambladores que proporcionan acceso a la funcionalidad de un programa.
