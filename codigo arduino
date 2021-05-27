@@ -1,0 +1,57 @@
+void setup()
+{
+  // Tareas de configuración 
+  Serial.begin(9600);
+}
+
+void loop()
+{
+    
+  if (Serial.available() > 0)  // Si hay mensajes procedentes del PC  
+    procesar_mensaje();
+	
+   
+  
+}
+
+
+void procesar_mensaje(void)
+{
+  int numero, led;
+  String cadena = Serial.readStringUntil('\n'); 
+  String valor = Serial.readStringUntil('\n');  
+  numero = valor.toInt();  
+  
+  if (cadena.equals("ENCENDER_LED"))  
+    {
+
+    if(numero < 100) {
+       digitalWrite (numero,HIGH);
+ 
+       Serial.println ("LED_ENCENDIDO ");
+       Serial.println (numero);
+       delay(2000);
+
+       digitalWrite (numero,LOW);
+
+    }
+    else
+    {
+      led=numero%10;
+       digitalWrite (led,HIGH);
+ 
+       Serial.println ("LED_ENCENDIDO ");
+       Serial.println (led);
+       delay(numero);
+
+       digitalWrite (led,LOW); 
+    }
+       
+       
+ 
+    }
+	else
+	 if (cadena.equals("")) 
+	  {
+	  }
+}
