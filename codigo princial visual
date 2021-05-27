@@ -1,0 +1,360 @@
+#define MAX_BUFFER 200
+#define MAX_INTENTOS_READ 4
+#define MS_ENTRE_INTENTOS 250
+#define SI 1
+#define NO 0
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <windows.h>
+#include <string.h>
+#include <conio.h>
+#include <time.h>
+#include "SerialClass/SerialClass.h"
+
+// Funciones prototipo
+int menu_principal(void);
+void configura(void);
+
+void Talk_with_Arduino(Serial* Arduino);
+void Send_to_hw(Serial*, char*);
+int Receive_from_hw(Serial* Arduino, char* BufferEntrada);
+int Send_and_Receive(Serial* Arduino, const char* msg_out, int valor_out, char* msg_in, int* valor_in);
+
+void encender_led(Serial*, int);
+
+void encender_led(Serial* Arduino, int n)
+{
+	char Mensaje[MAX_BUFFER];
+	char Mensaje_recibido[MAX_BUFFER];
+	int numero_recibido, bytes_recibidos;
+	char Mens[14]= "ENCENDER_LED";
+
+	//Mens[12] = n + '0';
+	//printf("%s", Mens);
+
+	  strcpy_s(Mensaje, MAX_BUFFER, "ENCENDER_LED");
+	//strcpy_s(Mensaje, MAX_BUFFER, Mens);
+
+	//Send_to_hw(Arduino,Mensaje);
+	bytes_recibidos = Send_and_Receive(Arduino, Mensaje, n, Mensaje_recibido, &numero_recibido);
+	if (bytes_recibidos != -1)
+	{
+		printf("He recibido %s y %d\n", Mensaje_recibido, numero_recibido);
+	}
+}
+
+void encender_un_led(Serial* Arduino);
+
+void encender_un_led_tiempo(Serial* Arduino);
+
+void secuencia_leds(Serial* Arduino);
+
+void fichero_led(Serial* Arduino);
+
+void mensaje_morse(Serial* Arduino);
+
+int main(void)
+{
+	Serial* Arduino;
+	char puerto[] = "COM5"; //Puerto serie al que está conectado Arduino
+	int opc;  // Opción del menú principal seleccionada
+
+	// Tareas de configuración y carga
+	configura();
+	Arduino = new Serial((char*)puerto);  // Establece la conexión con Arduino
+
+	// Bucle principal de la aplicación
+	do
+	{
+		opc = menu_principal();
+		switch (opc)
+		{
+		case 1:encender_un_led(Arduino);
+			break;
+		
+		case 2:encender_un_led_tiempo(Arduino);
+			break;
+		
+		case 3:secuencia_leds(Arduino);
+			break;
+		
+		case 4:fichero_led(Arduino);
+			break;
+
+		case 5:mensaje_morse(Arduino);
+			break;
+
+		case 6:break;
+		}
+		printf("\n\n");
+	} while (opc != 6);
+
+	// Tareas de desconexión y cierre 
+	return 0;
+}
+
+int menu_principal(void)
+{
+	int opcion;
+	do
+	{
+		printf("1 - Encender un led indicando su número\n");
+		printf("2 - Encender un led indicando su número y el tiempo\n");
+		printf("3 - Encender una secuencia aleatoria de LEDs\n");
+		printf("4 - Acceso al fichero LEDs.txt\n");
+		printf("5 - Código Morse\n");
+		printf("6 - Cerrar Aplicación\n");
+		printf("Seleccione opción:");
+		scanf_s("%d", &opcion);
+		if (opcion < 1 || opcion>6)
+			printf("\nOpción inexistente.\n\n");
+	} while (opcion < 1 || opcion>6);
+	return opcion;
+}
+
+void configura(void)
+{
+	// Establece juego de caracteres castellano
+	// Para que funcione hay que partir de un proyecto vacío
+	// No utilice la plantilla Aplicación de consola C++
+	setlocale(LC_ALL, "spanish");
+}
+
+// Ejemplo de función de intercambio de datos con Arduino
+void Talk_with_Arduino(Serial* Arduino)
+{
+	//char BufferSalida[MAX_BUFFER];
+	char BufferEntrada[MAX_BUFFER];
+	int bytesReceive,numero_recibido;
+	
+	if (Arduino->IsConnected()) // Si hay conexión con Arduino 
+	{
+
+		// Para enviar un mensaje y obtener una respuesta se utiliza la función Send_and_Receive
+		// El mensaje está formado por un texto y un entero
+		// El mensaje que se recibe está formado también por un texto y un entero.
+		// Parámetros de la función:
+		// El primero es la referencia a Arduino
+		// El segundo es el mensaje que se desea enviar
+		// El tercero es un entero que complementa al mensaje que se desea enviar
+		// El cuarto es el vector de char donde se recibe la respuesta
+		// El quinto es la referencia donde se recibe el entero de la respuesta
+		// IMPORTANTE: El mensaje de respuesta que emite Arduino  debe incluir un espacio en blanco separando respuesta de valor
+		// La función devuelve un entero con los bytes recibidos. Si es cero no se ha recibido nada.
+
+		bytesReceive = Send_and_Receive(Arduino, "GET_AFORO_MAX", -1, BufferEntrada, &numero_recibido);
+		if (bytesReceive == 0)
+			printf("No se ha recibido respuesta al mensaje enviado\n");
+		else
+			printf("Mensaje recibido %s %d\n", BufferEntrada, numero_recibido);
+	}
+	else
+		printf("La comunicación con la plataforma hardware no es posible en este momento\n"); // Req 3
+}
+
+// Protocolo de intercambio mensajes entre Pc y platforma hardware
+// Envío Mensaje valor
+// Recibe Mensaje valor
+		// IMPORTANTE: El mensaje de respuesta que emite Arduino  debe incluir un espacio en blanco separando respuesta de valor
+// Retorna bytes de la respuesta (0 si no hay respuesta)
+int Send_and_Receive(Serial* Arduino, const char* msg_out, int valor_out, char* msg_in, int* valor_in)
+{
+	char BufferSalida[MAX_BUFFER];
+	char BufferEntrada[MAX_BUFFER];
+	char* ptr;
+	int bytesReceive;
+
+	sprintf_s(BufferSalida, "%s\n%d\n", msg_out, valor_out);
+	Send_to_hw(Arduino, BufferSalida);
+	bytesReceive = Receive_from_hw(Arduino, BufferEntrada);
+	if (bytesReceive != 0)
+	{
+		ptr = strpbrk(BufferEntrada, " ");
+		if (ptr == NULL)
+			*valor_in = -1;
+		else
+		{
+			*valor_in = atoi(ptr);
+			*ptr = '\0';
+		}
+		strcpy_s(msg_in, MAX_BUFFER, BufferEntrada);
+	}
+	return bytesReceive;
+}
+
+
+// Envía un mensaje a la plataforma hardware
+void Send_to_hw(Serial* Arduino, char* BufferSalida)
+{
+	Arduino->WriteData(BufferSalida, strlen(BufferSalida));
+}
+
+//Recibe (si existe) un mensaje de la plataforma hardware
+//Realiza MAX_INTENTOS_READ para evitar mensajes recortados
+int Receive_from_hw(Serial* Arduino, char* BufferEntrada)
+{
+	int bytesRecibidos, bytesTotales = 0;
+	int intentos_lectura = 0;
+	char cadena[MAX_BUFFER];
+
+	BufferEntrada[0] = '\0';
+	while (intentos_lectura < MAX_INTENTOS_READ)
+	{
+		cadena[0] = '\0';
+		bytesRecibidos = Arduino->ReadData(cadena, sizeof(char) * (MAX_BUFFER - 1));
+		if (bytesRecibidos != -1)
+		{
+			cadena[bytesRecibidos] = '\0';
+			strcat_s(BufferEntrada, MAX_BUFFER, cadena);
+			bytesTotales += bytesRecibidos;
+		}
+		intentos_lectura++;
+		Sleep(MS_ENTRE_INTENTOS);
+	}
+	return bytesTotales;
+}
+void encender_un_led(Serial* Arduino) {
+	int n;
+	do {
+		printf("Teclee el numero de LED que desea encender (disponibles del 1 al 6)\n");
+		scanf_s("%d", &n);
+		if (n < 1 || n>6) printf("Número de LED no válido\n");
+	} while (n < 1 || n>6);
+
+	encender_led(Arduino, n);
+
+
+}
+
+void encender_un_led_tiempo(Serial* Arduino) {
+	int n, t;
+	do {
+		printf("Teclee el numero de LED que desea encender (disponibles del 1 al 6)\n");
+		scanf_s("%d", &n);
+		if (n < 1 || n>6) printf("Número de LED no válido\n");
+	} while (n < 1 || n>6);
+
+	do {
+		printf("Teclee el tiempo que desea encenderlo (entre 1 y 10 segundos)\n");
+		scanf_s("%d", &t);
+		if (t < 1 || t>10) printf("Tiwmpo de LED no válido\n");
+	} while (t < 1 || t>10);
+
+	n = t * 1000 + n;
+
+	encender_led(Arduino, n);
+}
+
+void secuencia_leds(Serial* Arduino) {
+	int luces[10], tiempos[10], num_luces, i;
+	srand(time(NULL));
+
+	printf("Generamos numero de luces(de 1 a 10), secuencia de luces (de 0 a 6) y los tiempos (de 1 a 5)\n");
+	num_luces = rand() % 10 + 1;
+	printf("Se van a encender %d luces\n", num_luces);
+	for (i = 0; i < num_luces; i++) {
+		luces[i] = rand() % 6 + 1;
+		tiempos[i] = rand() % 5 + 1;
+	}
+	printf("\tLa secuencia de luces será la siguiente:\n");
+	for (i = 0; i < num_luces; i++) {
+		printf("\t\tLed:%d\tTiempo:%d\n", luces[i], tiempos[i]);
+	}
+
+	for (i = 0; i < num_luces; i++) {
+		encender_led(Arduino, tiempos[i]*1000+luces[i]);
+		Sleep(tiempos[i] * 1000);
+	}
+
+}
+
+void fichero_led(Serial* Arduino) {
+	FILE* pf;
+	int luz, tiempo;
+	int ctrl;
+	srand(time(NULL));
+
+	printf("Leemos del fichero LED.txt una secuencia de luces y tiempos\n");
+
+	fopen_s(&pf, "LED.txt", "r");
+
+	if (pf == NULL) {
+		printf("Error al abrir el archibo LED.txt\n");
+	}
+	else
+	{
+		do {
+			ctrl = fscanf_s(pf, "%d %d", &luz, &tiempo);
+			if (ctrl == 2) {
+				//printf("%d - %d\n", luz, tiempo);
+				encender_led(Arduino, tiempo * 1000 + luz);
+				Sleep(tiempo * 1000);
+			}
+		} while (ctrl == 2);
+		printf("Secuencia de archivo completada\n");
+		fclose(pf);
+	}
+
+}
+
+void mensaje_morse(Serial* Arduino) {
+	FILE* pm;
+	char palabra[25];
+	char cadena[10];
+	int ctrl, palabra_mal=0;
+	int i, j;
+
+
+	fopen_s(&pm, "AlfabetoMorse.txt", "r");
+	if (pm == NULL) {
+		printf("Error al abrir el archivo Morse\n");
+	}
+	else
+	{
+		printf("Teclee una palabra en minusculas que se traducirá a Morse\n");
+		getchar();
+		gets_s(palabra);
+
+		for (i = 0; i < strlen(palabra); i++) {
+			if (palabra[i] < 'a' || palabra[i]>'z')
+				palabra_mal = 1;
+		}
+			if(palabra_mal==1)
+				printf("La palabra es incorrecta\n");
+				
+			else
+			{	//Buscamos la letra en el fichero morse
+				for (i = 0; i < strlen(palabra); i++) {
+					do {
+						ctrl = fscanf_s(pm, "%s", &cadena,10);
+						if (ctrl == 1) {
+							//printf("%s\n", cadena);
+							if (cadena[0] == palabra[i]) {
+								//Letra encontrada en el fichero morse
+								for (j = 1; j < strlen(cadena); j++) {
+									//Encendemos luces con la letra
+									if (cadena[j] == '.') {
+										encender_led(Arduino, 1002);
+										Sleep(1000);
+									}
+									else {
+										encender_led(Arduino, 2503);
+										Sleep(3000);
+
+									}
+								}
+								ctrl = 0;
+							}
+						}
+					} while (ctrl == 1);
+					rewind(pm);
+					Sleep(500);
+				}
+			}
+
+
+		fclose(pm);
+	}
+}
