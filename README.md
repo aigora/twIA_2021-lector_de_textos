@@ -1,6 +1,6 @@
 ## ARDUINO LEDS
-Este proyecto trata sobre la grabación de ciertos sonidos por medio de una grabadora y que estos sean reproducidos por medio de un programa que los almacene. 
-Una vez almacenados, cuando queramos reproducir cierto sonido, lo único que tenemos que hacer es poner una frase y clickar en el pulsador y que este accione el programa reproduciendo dicho sonido.
+Este proyecto trata sobre una placa base Arduino capaz de apagar y encender luces Led según sean demandado por el usuario. 
+Consta de cinco funciones en relación al apagado y encendido y un fin que es la traducción de palabras al alfabeto Morse. 
 
 ## INTEGRANTES DEL EQUIPO 
 
