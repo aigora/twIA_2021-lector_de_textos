@@ -253,7 +253,7 @@ void secuencia_leds(Serial* Arduino) {
 	num_luces = rand() % 10 + 1; //Genera un numero aleatorio entre 1 y 10, que corresponde con el numero de luces que se van a encender
 	printf("Se van a encender %d luces\n", num_luces); //Imprime la variable anterior
 	for (i = 0; i < num_luces; i++) { 
-		luces[i] = rand() % 7 + 1; //Genera un numero aleatorio entre el uno y el 7
+		luces[i] = rand() % 6 + 2; //Genera un numero aleatorio entre el uno y el siete
 		tiempos[i] = rand() % 5 + 1; //Genera un tiempo aletorio que sera el tiempo que este encendida cada luz
 	}
 	printf("\tLa secuencia de luces será la siguiente:\n"); //Imprime La secuencia de luces generada
