@@ -17,26 +17,37 @@ circuito en sistemas de producción comercial. Por último, cada luz LED tendrá
 
 2.Motivación
 
-Nuestra principal motivación a la hora de realizar este proyecto es intentar completar un sistema que pueda utilizarse con fines decorativos y en algunas aplicaciones en 
-lenguajes como el código morse. Los leds se encenderán y apagarán desde el pin 1 al 6. Más tarde, se realizará el proceso inverso y los LEDS se encenderán y apagarán desde 
-el pin 6 al 1.Esta secuencia se debe repetir de una manera indefinida.
-
+Nuestra principal motivación a la hora de realizar este proyecto es intentar completar un sistema que pueda utilizarse tanto con fines decorativos, como con fines recreativos
+y en algunas aplicaciones en lenguajes como el código morse. Nuestro Arduino consta de un menú con cinco aplicaciones. El usuario debe solicitar al programa cuál quiere para el
+inicio del mismo. En el siguiente apartado se relatará cada una de estas aplicaciones.
 
 3 y 4. Método y ejemplos de utilización
 
+Para entender el funcionamiento de la conexión Arduino y el programa, es fundamental comprender la Ley de Ohm.
 Gracias a la Ley de Ohm vamos a poder relacionar a través de una sencilla fórmula, voltaje, intensidad y resistencia. La Ley de Ohm establece que la intensidad de la
 corriente eléctrica que circula por un conductor eléctrico es directamente proporcional a la diferencia de potencial aplicada e inversamente proporcional a la resistencia 
 del mismo, o lo que es lo mismo:
-I = V / R
+                                                                         I = V / R
 ·    Voltaje: también conocido como tensión, es la presión que una fuente eléctrica ejerce sobre las cargas eléctricas (electrones) eºn un circuito eléctrico. Se mide en 
-Voltios (V).
+     Voltios (V).
 ·    Intensidad: cantidad de cargas eléctricas, que circulan por un conductor en un momento determinado. Se mide en Amperios (A).
 ·    Resistencia: oposición que ejerce el cuerpo al paso de la corriente eléctrica. Se mide en Ohmios (Ω).
  
 Cuando conectamos un componente electrónico a una placa de Arduino, se ejerce sobre él una diferencia de potencial de ambos extremos, es decir, estará recibiendo una 
-determinada tensión.
-Los Led que estamos utilizando para la práctica admiten una tensión máxima de 2.1 V y para evitar que se puedan dañar tendremos que colocarle una resistencia al circuito. Para 
-ello, vamos a calcular el valor de la resistencia siguiendo la Ley de Ohm, es decir, la tensión en el Led tiene que ser 2.1V.  
+determinada tensión. Los Led que estamos utilizando para la práctica admiten una tensión máxima de 2.1 V y para evitar que se puedan dañar tendremos que colocarle una 
+resistencia al circuito. El valor de esta resistencia se calculará siguiento la Ley de Ohm.
+
+Una vez entendida la Ley de Ohm y la conexión entre la placa y el circuito electrónico, se explicarán con detalle las cinco funciones que realiza el programa.
+
+- Encender un led indicando su número: el programa demandará el número de Led que el usuario desea encender y procederá al encendido del mismo.
+- Encender un led indicando el tiempo que el usuario quiere que se encienda: esta función es similar a la atención, pero el usuario podrá además añadir un tiempo durante el 
+  cual el Led se encenderá-
+- Encender los leds con una secuencia aleatoria: el programa pedirá un intervalo de leds y un intervalo de tiempo al usuario y generará una secuencia aleatorio con los datos 
+  demandados.
+- Encender un led accediendo a un fichero: el programa almacenará datos de tiempo y número de leds en ficheros que servirán si el usuario quiere acceder al encendido de los leds 
+  a partir del mismo.
+- Función código Morse: el usuario podrá escribir una palabra que el programa traducirá automáticamente al alfabeto Morse y realizará la secuencia de luces necesaria para 
+  transmitirla.
 
 
 5. Microsoft
