@@ -17,12 +17,12 @@
 int menu_principal(void);
 void configura(void);
 
-void Talk_with_Arduino(Serial* Arduino);
-void Send_to_hw(Serial*, char*);
-int Receive_from_hw(Serial* Arduino, char* BufferEntrada);
-int Send_and_Receive(Serial* Arduino, const char* msg_out, int valor_out, char* msg_in, int* valor_in);
+void Talk_with_Arduino(Serial* Arduino); //Manda informacion al Arduino
+void Send_to_hw(Serial*, char*); //Manda informacion al Arduino
+int Receive_from_hw(Serial* Arduino, char* BufferEntrada); //Recibido del Arduino
+int Send_and_Receive(Serial* Arduino, const char* msg_out, int valor_out, char* msg_in, int* valor_in); //Mandado y recibido
 
-void encender_led(Serial*, int);
+void encender_led(Serial*, int); //Funcion encender_led
 
 void encender_led(Serial* Arduino, int n)
 {
@@ -31,29 +31,26 @@ void encender_led(Serial* Arduino, int n)
 	int numero_recibido, bytes_recibidos;
 	char Mens[14]= "ENCENDER_LED";
 
-	//Mens[12] = n + '0';
-	//printf("%s", Mens);
+	
 
 	  strcpy_s(Mensaje, MAX_BUFFER, "ENCENDER_LED");
-	//strcpy_s(Mensaje, MAX_BUFFER, Mens);
 
-	//Send_to_hw(Arduino,Mensaje);
 	bytes_recibidos = Send_and_Receive(Arduino, Mensaje, n, Mensaje_recibido, &numero_recibido);
 	if (bytes_recibidos != -1)
 	{
-		printf("He recibido %s y %d\n", Mensaje_recibido, numero_recibido);
+		printf("He recibido %s y %d\n", Mensaje_recibido, numero_recibido); //Imprime el mensaje que recibe arduino y el numero del Led
 	}
 }
 
-void encender_un_led(Serial* Arduino);
+void encender_un_led(Serial* Arduino); //Funcion para enender un led segun el pin donde este conectado
 
-void encender_un_led_tiempo(Serial* Arduino);
+void encender_un_led_tiempo(Serial* Arduino); //Funcion para encender un led concreto un tiempo determinado por el usuario
 
-void secuencia_leds(Serial* Arduino);
+void secuencia_leds(Serial* Arduino); //Funcion que crea una secuencia aleatoria de numero correpondientes con cada led. Estos se van encendiendo y apagando.
 
-void fichero_led(Serial* Arduino);
+void fichero_led(Serial* Arduino); //Una vez leida la informacion escrita en el fichero, la funcion comienza a encender el led correspondiente.
 
-void mensaje_morse(Serial* Arduino);
+void mensaje_morse(Serial* Arduino); //Funcion la cual traduce una palabra a codigo morse
 
 int main(void)
 {
@@ -68,8 +65,8 @@ int main(void)
 	// Bucle principal de la aplicación
 	do
 	{
-		opc = menu_principal();
-		switch (opc)
+		opc = menu_principal(); //Opcion que introduce el usuario
+		switch (opc) //Menu principal con las 6 opciones a elegir
 		{
 		case 1:encender_un_led(Arduino);
 			break;
@@ -89,7 +86,7 @@ int main(void)
 		case 6:break;
 		}
 		printf("\n\n");
-	} while (opc != 6);
+	} while (opc != 6); //Bucle para que aparezca siempre el menu despues de cada funcion ejecutada
 
 	// Tareas de desconexión y cierre 
 	return 0;
@@ -100,7 +97,7 @@ int menu_principal(void)
 	int opcion;
 	do
 	{
-		printf("1 - Encender un led indicando su número\n");
+		printf("1 - Encender un led indicando su número\n"); //Menu principal que sale en pantalla
 		printf("2 - Encender un led indicando su número y el tiempo\n");
 		printf("3 - Encender una secuencia aleatoria de LEDs\n");
 		printf("4 - Acceso al fichero LEDs.txt\n");
@@ -110,7 +107,7 @@ int menu_principal(void)
 		scanf_s("%d", &opcion);
 		if (opcion < 1 || opcion>6)
 			printf("\nOpción inexistente.\n\n");
-	} while (opcion < 1 || opcion>6);
+	} while (opcion < 1 || opcion>6); //Bucle para que siempre aparezca el menu despues de cada opcion ejecutada
 	return opcion;
 }
 
@@ -151,7 +148,7 @@ void Talk_with_Arduino(Serial* Arduino)
 			printf("Mensaje recibido %s %d\n", BufferEntrada, numero_recibido);
 	}
 	else
-		printf("La comunicación con la plataforma hardware no es posible en este momento\n"); // Req 3
+		printf("La comunicación con la plataforma hardware no es posible en este momento\n"); // En el caso de haber problemas de conexion
 }
 
 // Protocolo de intercambio mensajes entre Pc y platforma hardware
@@ -159,7 +156,7 @@ void Talk_with_Arduino(Serial* Arduino)
 // Recibe Mensaje valor
 		// IMPORTANTE: El mensaje de respuesta que emite Arduino  debe incluir un espacio en blanco separando respuesta de valor
 // Retorna bytes de la respuesta (0 si no hay respuesta)
-int Send_and_Receive(Serial* Arduino, const char* msg_out, int valor_out, char* msg_in, int* valor_in)
+int Send_and_Receive(Serial* Arduino, const char* msg_out, int valor_out, char* msg_in, int* valor_in) 
 {
 	char BufferSalida[MAX_BUFFER];
 	char BufferEntrada[MAX_BUFFER];
@@ -218,11 +215,11 @@ int Receive_from_hw(Serial* Arduino, char* BufferEntrada)
 void encender_un_led(Serial* Arduino) {
 	int n;
 	do {
-		printf("Teclee el numero de LED que desea encender (disponibles del 1 al 6)\n");
-		scanf_s("%d", &n);
-		if (n < 1 || n>6) printf("Número de LED no válido\n");
-	} while (n < 1 || n>6);
-
+		printf("Teclee el numero de LED que desea encender (disponibles del 2 al 7)\n"); //Imprime mensaje por pantalla para la eleccion del led deseado
+		scanf_s("%d", &n); //Almacena el numero introducido por el usuario 
+		if (n < 2 || n>7) printf("Número de LED no válido\n"); //Si el led introducido no esta entre los pines disponibles, saca por pantalla del no valido
+	} while (n < 2 || n>7); // Si los pines no son los disponibles, vuelve a realizar el bucle 
+	
 	encender_led(Arduino, n);
 
 
@@ -231,93 +228,93 @@ void encender_un_led(Serial* Arduino) {
 void encender_un_led_tiempo(Serial* Arduino) {
 	int n, t;
 	do {
-		printf("Teclee el numero de LED que desea encender (disponibles del 1 al 6)\n");
-		scanf_s("%d", &n);
-		if (n < 1 || n>6) printf("Número de LED no válido\n");
-	} while (n < 1 || n>6);
+		printf("Teclee el numero de LED que desea encender (disponibles del 2 al 7)\n");//Imprime mensaje por pantalla para la eleccion del led deseado
+		scanf_s("%d", &n);//Almacena el numero introducido por el usuario 
+		if (n < 2 || n>7) printf("Número de LED no válido\n");/Si el led introducido no esta entre los pines disponibles, saca por pantalla del no valido
+	} while (n < 2 || n>7);// Si los pines no son los disponibles, vuelve a realizar el bucle 
 
 	do {
-		printf("Teclee el tiempo que desea encenderlo (entre 1 y 10 segundos)\n");
-		scanf_s("%d", &t);
-		if (t < 1 || t>10) printf("Tiwmpo de LED no válido\n");
-	} while (t < 1 || t>10);
+		printf("Teclee el tiempo que desea encenderlo (entre 1 y 10 segundos)\n"); //Pide el tiempo al usuario 
+		scanf_s("%d", &t); //Almacena el tiempo introducido por el usuario
+		if (t < 1 || t>10) printf("Tiempo de LED no válido\n"); //Si el tiempo no esta entre el rango disponible imprime el mensaje por pantalla
+	} while (t < 1 || t>10); //Si el tiempo no esta entre el disponible vuelve a realizar el bucle
 
-	n = t * 1000 + n;
+	n = t * 1000 + n; // Variable n pasa a valer su valor mas el tiempo introducido por 1000.
 
-	encender_led(Arduino, n);
+	encender_led(Arduino, n); //Llama a la funcion encender_led para mandarla al Arduino
 }
 
 void secuencia_leds(Serial* Arduino) {
-	int luces[10], tiempos[10], num_luces, i;
+	int luces[10], tiempos[10], num_luces, i; //Declaracion de variables
 	srand(time(NULL));
 
-	printf("Generamos numero de luces(de 1 a 10), secuencia de luces (de 0 a 6) y los tiempos (de 1 a 5)\n");
-	num_luces = rand() % 10 + 1;
-	printf("Se van a encender %d luces\n", num_luces);
-	for (i = 0; i < num_luces; i++) {
-		luces[i] = rand() % 6 + 1;
-		tiempos[i] = rand() % 5 + 1;
+	printf("Generamos numero de luces(de 1 a 10), secuencia de luces (de 1 a 7) y los tiempos (de 1 a 5)\n"); //Imprime por pantalla 
+	num_luces = rand() % 10 + 1; //Genera un numero aleatorio entre 1 y 10, que corresponde con el numero de luces que se van a encender
+	printf("Se van a encender %d luces\n", num_luces); //Imprime la variable anterior
+	for (i = 0; i < num_luces; i++) { 
+		luces[i] = rand() % 7 + 1; //Genera un numero aleatorio entre el uno y el 7
+		tiempos[i] = rand() % 5 + 1; //Genera un tiempo aletorio que sera el tiempo que este encendida cada luz
 	}
-	printf("\tLa secuencia de luces será la siguiente:\n");
+	printf("\tLa secuencia de luces será la siguiente:\n"); //Imprime La secuencia de luces generada
 	for (i = 0; i < num_luces; i++) {
-		printf("\t\tLed:%d\tTiempo:%d\n", luces[i], tiempos[i]);
+		printf("\t\tLed:%d\tTiempo:%d\n", luces[i], tiempos[i]); // Va imprimiendo a medida que se encienden las luces
 	}
 
 	for (i = 0; i < num_luces; i++) {
-		encender_led(Arduino, tiempos[i]*1000+luces[i]);
-		Sleep(tiempos[i] * 1000);
+		encender_led(Arduino, tiempos[i]*1000+luces[i]); //Llama a la funcion encender led para que el Arduino lo reciba junto con el tiempo que permaneceran encendidas
+		Sleep(tiempos[i] * 1000); //Tiempo de espera entre una bombilla y otra
 	}
 
 }
 
 void fichero_led(Serial* Arduino) {
-	FILE* pf;
-	int luz, tiempo;
+	FILE* pf; //Declaracion del fichero
+	int luz, tiempo; //Declaracion de variables
 	int ctrl;
 	srand(time(NULL));
 
-	printf("Leemos del fichero LED.txt una secuencia de luces y tiempos\n");
+	printf("Leemos del fichero LED.txt una secuencia de luces y tiempos\n"); //Imprime por pantalla
 
-	fopen_s(&pf, "LED.txt", "r");
+	fopen_s(&pf, "LED.txt", "r");  //Apertura  del fichero
 
-	if (pf == NULL) {
+	if (pf == NULL) { //Si hay un error a la hora de abrir el fichero se ejecuta este bucle
 		printf("Error al abrir el archibo LED.txt\n");
 	}
-	else
+	else //Si no hay ningun error al abrir el fichero se ejecuta el bucle del else
 	{
 		do {
-			ctrl = fscanf_s(pf, "%d %d", &luz, &tiempo);
-			if (ctrl == 2) {
+			ctrl = fscanf_s(pf, "%d %d", &luz, &tiempo); //Lectura de los datos del fichero en pantalla
+			if (ctrl == 2) { //Lee dos datos 
 				//printf("%d - %d\n", luz, tiempo);
-				encender_led(Arduino, tiempo * 1000 + luz);
-				Sleep(tiempo * 1000);
+				encender_led(Arduino, tiempo * 1000 + luz); //Llama a la funcion encender_led para que Arduino lo reciba junto con el tiempo
+				Sleep(tiempo * 1000); //Tiempo de espera entre que se enciende un led y otro
 			}
 		} while (ctrl == 2);
-		printf("Secuencia de archivo completada\n");
-		fclose(pf);
+		printf("Secuencia de archivo completada\n"); //Cuando se completa la secuencia del fichero imprime por pantalla
+		fclose(pf); //Cierra el fichero
 	}
 
 }
 
 void mensaje_morse(Serial* Arduino) {
-	FILE* pm;
-	char palabra[25];
+	FILE* pm; //Declaracion del fichero
+	char palabra[25]; //Declaracion de variables
 	char cadena[10];
 	int ctrl, palabra_mal=0;
 	int i, j;
 
 
-	fopen_s(&pm, "AlfabetoMorse.txt", "r");
-	if (pm == NULL) {
+	fopen_s(&pm, "AlfabetoMorse.txt", "r"); /7Apertura del fichero
+	if (pm == NULL) { //Si hay un error a la hora de abrir el fichero se ejecuta este bucle
 		printf("Error al abrir el archivo Morse\n");
 	}
-	else
+	else //Si no hay ningun error al abrir el fichero se ejecuta el bucle del else
 	{
-		printf("Teclee una palabra en minusculas que se traducirá a Morse\n");
+		printf("Teclee una palabra en minusculas que se traducirá a Morse\n"); //Imprime el mensaje por pantalla
 		getchar();
-		gets_s(palabra);
+		gets_s(palabra); //Almacena la palabra introducida por el usuario.
 
-		for (i = 0; i < strlen(palabra); i++) {
+		for (i = 0; i < strlen(palabra); i++) { 
 			if (palabra[i] < 'a' || palabra[i]>'z')
 				palabra_mal = 1;
 		}
@@ -328,33 +325,35 @@ void mensaje_morse(Serial* Arduino) {
 			{	//Buscamos la letra en el fichero morse
 				for (i = 0; i < strlen(palabra); i++) {
 					do {
-						ctrl = fscanf_s(pm, "%s", &cadena,10);
+						ctrl = fscanf_s(pm, "%s", &cadena,10); //Lectura de los datos del fichero en pantalla
 						if (ctrl == 1) {
 							//printf("%s\n", cadena);
 							if (cadena[0] == palabra[i]) {
 								//Letra encontrada en el fichero morse
 								for (j = 1; j < strlen(cadena); j++) {
 									//Encendemos luces con la letra
-									if (cadena[j] == '.') {
-										encender_led(Arduino, 1002);
-										Sleep(1000);
+									if (cadena[j] == '.') { //Si la palabra contiene un punto
+										encender_led(Arduino, 1002); //Llamada a la funcion encender_led para que lo reciba el Arduino
+												//junto con el tiempo de encendido (1000) y el pin del led que enciende para el punto(2)
+										Sleep(1000); //Tiempo de espera entre el encendido de un led al siguiente
 									}
-									else {
-										encender_led(Arduino, 2503);
-										Sleep(3000);
+									else { //Si la palabra contiene una raya
+										encender_led(Arduino, 2503); //Llamada a la funcion encender_led para que lo reciba el Arduino
+												//junto con el tiempo de encendido (2000) y el pin del led que enciende para la raya(3)
+										Sleep(3000);//Tiempo de espera entre el encendido de un led al siguiente
 
 									}
 								}
 								ctrl = 0;
 							}
 						}
-					} while (ctrl == 1);
+					} while (ctrl == 1); 
 					rewind(pm);
-					Sleep(500);
+					Sleep(500); //Tiempo de espera
 				}
 			}
 
 
-		fclose(pm);
+		fclose(pm); //Cierra el fichero
 	}
 }
