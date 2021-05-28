@@ -18,8 +18,8 @@ circuito en sistemas de producción comercial. Por último, cada luz LED tendrá
 2.Motivación
 
 Nuestra principal motivación a la hora de realizar este proyecto es intentar completar un sistema que pueda utilizarse con fines decorativos. Los leds se encenderán y 
-apagarán desde el pin - al -. Entre led y led habrá un tiempo de encendido y apagado de – ms.  Más tarde, se realizará el proceso inverso y los LEDS se encenderán y 
-apagarán desde el pin - al -, con un tiempo de encendido y apagado de - ms. Esta secuencia se debe repetir de una manera indefinida.
+apagarán desde el pin 1 al 6. Entre led y led habrá un tiempo de encendido y apagado de – ms.  Más tarde, se realizará el proceso inverso y los LEDS se encenderán y 
+apagarán desde el pin 6 al 1, con un tiempo de encendido y apagado de - ms. Esta secuencia se debe repetir de una manera indefinida.
 
 
 3 y 4. Método y ejemplos de utilización
