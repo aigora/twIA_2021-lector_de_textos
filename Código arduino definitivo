@@ -1,3 +1,4 @@
+//REALIZADO POR ALEJANDRO PALOMO, CRISTINA NAVARRO Y MÓNICA SACRISTÁN
 void setup()
 { 
   // Tareas de configuración 
@@ -10,7 +11,6 @@ void loop()
   if (Serial.available() > 0)  // Si hay mensajes procedentes del PC  
     procesar_mensaje();
 	
-   
   
 }
 
@@ -40,11 +40,11 @@ void procesar_mensaje(void)
       led=numero%10; //Led se le asigna el resto del numero introducido entre 10
        digitalWrite (led,HIGH); //Enciende el Led en la posicion led
  
-       Serial.println ("LED_ENCENDIDO "); 
+       Serial.println ("LED_ENCENDIDO ");  //Imprime por pantalla el mensaje Led_encendido
        Serial.println (led); //Imprime por pantalla el numero de led escogido 
        delay(numero);//Esta encendido los segundos que valga numero
 
-       digitalWrite (led,LOW); 
+       digitalWrite (led,LOW); //Apaga el Led
     }
        
        
